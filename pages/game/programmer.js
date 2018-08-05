@@ -178,9 +178,9 @@ Page({
       game2048.playGame(direction);
       
       // 停止所有音频
-      winAudio.stop()
-      failAudio.stop()
-      moveAudio.stop()
+      // winAudio.stop()
+      // failAudio.stop()
+      // moveAudio.stop()
       
       const that = this
       if (game2048.getGameStatus() === 'end') {
