@@ -194,6 +194,7 @@ Page({
             if (res.confirm) {
               // console.log('用户点击确定')
               that.handleRestart()
+              failAudio.stop()
             } else if (res.cancel) {
               console.log('用户点击取消')
             }
@@ -210,6 +211,7 @@ Page({
             if (res.confirm) {
               // console.log('用户点击确定')
               that.handleRestart()
+              winAudio.stop()
             } else if (res.cancel) {
               console.log('用户点击取消')
             }
