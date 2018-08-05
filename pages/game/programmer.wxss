@@ -1,6 +1,16 @@
 /* pages/game/programmer.wxss */
 .background {
-    background-color: #FFDD99;
+    background: url('http://demo.infinitysia.com/dys/2048/img/bg.jpg');
+    background-size: cover;
+    padding-top: 150rpx;
+}
+.score{
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+.timebar{
+    color: #fff;
 }
 .grid-body {
     height: 520rpx;
@@ -60,12 +70,12 @@
     font: bold 30rpx arial;
 }
 .button-restart {
-    font: bold 60rpx arial;
+    font-size: 30rpx;
     background-color: #FFDD99;
-    border-radius: 10rpx;
+    border-radius: 8rpx;
     text-align: center;
-    line-height: 100%;
-    padding: 10rpx;
+    /* line-height: 100%; */
+    padding: 5rpx 10rpx;
 }
 .button-restart-hover {
     background-color: #CCBB77;
