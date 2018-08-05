@@ -21,6 +21,16 @@
 </template>
 <!--view-->
 <view class="background">
+    <view class="score">分数：{{gameScore}}</view>
+    <view class="timebar">
+        <view class="time-data">{{gameTime}}</view>
+        <!-- <view class="time-progress">
+            <progress percent="60" stroke-width="12" color="#FF0000" />
+        </view> -->
+    </view>
+    <view class="grid-body">
+        <template is="grid" data="{{gridValue}}"></template>
+    </view>
     <view class="choicebar">
         <view class="choicebarelement">
             <button class="button-restart" hover-class="button-restart-hover" catchtap="handleRestart">{{restartPrompt}}</button>
@@ -40,13 +50,8 @@
             </view>
         </view>
     </view>
-    <view class="timebar">
-        <view class="time-data">{{gameTime}}</view>
-        <view class="time-progress"><progress percent="60" stroke-width="12" color="#FF0000"/></view>
-    </view>
-    <view class="grid-body">
-        <template is="grid" data="{{gridValue}}"></template>
-    </view>
+    
+    
     <!-- <view id="top-charts">
         <view id="charts-title">
             <text>{{"排行榜"}}</text>

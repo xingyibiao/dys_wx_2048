@@ -16,7 +16,7 @@ const GAME_AVAILABLE_VALUE = [2,4,8,16,32,64,128,512,1024,4096,9192];
 // game move direction
 const GAME_MOVE_DIRECTION = ["moveLeft", "moveRight", "moveTop", "moveButtom"];
 // game status
-const GAME_STATUS = ["playing", "end"];
+const GAME_STATUS = ["playing", "end", "win"];
 // game award
 const GAME_AWARD= ["2048", "4096"];
 
@@ -160,10 +160,18 @@ function freshGameStatus() {
     var existZeroArray = gameArray.some(function (element, index, array) {
         return element == 0;
     });
+
+    const isWin = gameArray.some((el) => {
+        return el === 2048
+    })
     if (existZeroArray == true) {
         gameStatus = GAME_STATUS[0];
     } else {
         gameStatus = GAME_STATUS[1];
+    }
+
+    if (isWin) {
+        gameStatus = GAME_STATUS[2]
     }
     return;
 }

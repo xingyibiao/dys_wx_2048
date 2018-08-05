@@ -16,7 +16,7 @@ moveAudio.obeyMuteSwitch = false
 
 // 失败音效
 const failAudio = wx.createInnerAudioContext()
-failAudio.src = 'http://demo.infinitysia.com/dys/2048/assets/fail.mp3'
+failAudio.src = 'http://demo.infinitysia.com/dys/2048/assets/lose.mp3'
 failAudio.obeyMuteSwitch = false
 
 Page({
@@ -24,7 +24,7 @@ Page({
     // 游戏数组值
     gridValue:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     // 游戏重新开始提示
-    restartPrompt:"重新开始",
+    restartPrompt:"再来亿把",
     // 游戏难度：1.时间160ms;2.时间80ms;3.时间40ms;4.时间20ms;5.时间10ms;
     gameLevel:[1,2,3,4,5],
     // 游戏难度初始值 index of gameLevel
@@ -43,6 +43,8 @@ Page({
     gameStartDate:0,
     // 游戏运行结束时间
     gameEndDate:0,
+    // 游戏分数
+    gameScore: 0,
     // 游戏触摸控制
     gameTouchInfo: {
         pointOrigin: {
@@ -174,12 +176,53 @@ Page({
         this.data.gameTouchInfo.pointTarget, this.data.gameDistanceThreshold)
       console.log(direction);
       game2048.playGame(direction);
-
-      this.data.winAudio.play()
-      console.log(this.data.winAudio, winAudio)
+      
+      // 停止所有音频
+      winAudio.stop()
+      failAudio.stop()
+      moveAudio.stop()
+      
+      const that = this
+      if (game2048.getGameStatus() === 'end') {
+        failAudio.play()
+        wx.showModal({
+          title: '倔倔',
+          content: '没办法，被天克',
+          showCancel: false,
+          confirmText: '再来亿把',
+          success: function (res) {
+            if (res.confirm) {
+              // console.log('用户点击确定')
+              that.handleRestart()
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      } else if (game2048.getGameStatus() === 'win') {
+        winAudio.play()
+        wx.showModal({
+          title: '鬼鬼',
+          content: '兄弟，你好像有点东西',
+          showCancel: false,
+          confirmText: '再来亿把',
+          success: function (res) {
+            if (res.confirm) {
+              // console.log('用户点击确定')
+              that.handleRestart()
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      } else {
+        moveAudio.play()
+      }
+      // failAudio.play()
       
       this.setData({
-        gridValue:game2048.getGameArray().slice()
+        gridValue: game2048.getGameArray().slice(),
+        gameScore: game2048.getGameScore(),
       });
     }
   },
